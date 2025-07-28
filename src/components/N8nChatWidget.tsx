@@ -28,6 +28,11 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
         <h2 className="text-2xl font-semibold text-gray-800">Ask me anything about my work and experience</h2>
       </div>
 
+      {/* Chat Interface Heading */}
+      <div className="text-center py-4">
+        <h3 className="text-lg font-medium text-gray-700">Start a conversation below</h3>
+      </div>
+
       {/* N8N Chat UI Container - Full Window Mode */}
       <div className="flex-1 w-full">
         <n8nchatui-inpage></n8nchatui-inpage>

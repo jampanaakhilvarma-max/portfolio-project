@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface N8nChatWidgetProps {
   onSkip: () => void;
 }
 
 const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const chatElementRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
     // Configure N8N Chat Widget
     const chatConfig = {
@@ -32,25 +35,56 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
       }
     };
 
-    function configureChatWidget(retries = 10) {
-      const chatElement = document.querySelector('n8nchatui-inpage');
-      if (chatElement) {
+    function configureChatWidget() {
+      if (chatElementRef.current) {
         Object.entries(chatConfig.chatWindow).forEach(([key, value]) => {
           if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
-            chatElement.setAttribute(`data-${key}`, value.toString());
+            chatElementRef.current!.setAttribute(`data-${key}`, value.toString());
           } else if (Array.isArray(value)) {
-            chatElement.setAttribute(`data-${key}`, JSON.stringify(value));
+            chatElementRef.current!.setAttribute(`data-${key}`, JSON.stringify(value));
           }
         });
-        chatElement.setAttribute('data-welcome-message', chatConfig.chatWindow.welcomeMessage);
-      } else if (retries > 0) {
-        setTimeout(() => configureChatWidget(retries - 1), 150);
+        chatElementRef.current.setAttribute('data-welcome-message', chatConfig.chatWindow.welcomeMessage);
       } else {
-        console.warn('n8nchatui-inpage element not found after multiple attempts. Chat widget may not be configured.');
+        console.warn('n8nchatui-inpage element not found. Chat widget may not be configured.');
       }
     }
 
-    configureChatWidget();
+    // Wait for the custom element to be defined before creating and configuring
+    if ('customElements' in window && typeof window.customElements.whenDefined === 'function') {
+      window.customElements.whenDefined('n8nchatui-inpage').then(() => {
+        // Create the chat element imperatively
+        if (containerRef.current && !chatElementRef.current) {
+          const chatElement = document.createElement('n8nchatui-inpage');
+          chatElement.setAttribute('data-welcome-message', chatConfig.chatWindow.welcomeMessage);
+          containerRef.current.appendChild(chatElement);
+          chatElementRef.current = chatElement;
+          
+          // Configure the element after it's added to DOM
+          setTimeout(configureChatWidget, 100);
+        }
+      });
+    } else {
+      // Fallback for very old browsers
+      setTimeout(() => {
+        if (containerRef.current && !chatElementRef.current) {
+          const chatElement = document.createElement('n8nchatui-inpage');
+          chatElement.setAttribute('data-welcome-message', chatConfig.chatWindow.welcomeMessage);
+          containerRef.current.appendChild(chatElement);
+          chatElementRef.current = chatElement;
+          
+          setTimeout(configureChatWidget, 100);
+        }
+      }, 500);
+    }
+
+    // Cleanup function
+    return () => {
+      if (chatElementRef.current && containerRef.current) {
+        containerRef.current.removeChild(chatElementRef.current);
+        chatElementRef.current = null;
+      }
+    };
   }, []);
 
   return (
@@ -82,8 +116,8 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
       </div>
 
       {/* N8N Chat UI Container - Full Window Mode */}
-      <div className="flex-1 w-full">
-        <n8nchatui-inpage data-welcome-message="Hi! I can walk you through Akhil Varma's product leadership, AI-driven projects, and key outcomes. Ask away — from roadmaps to results."></n8nchatui-inpage>
+      <div className="flex-1 w-full" ref={containerRef}>
+        {/* Chat element will be created and appended here imperatively */}
       </div>
     </div>
   );

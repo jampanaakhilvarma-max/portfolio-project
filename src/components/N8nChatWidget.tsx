@@ -24,30 +24,33 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
         fontSize: 16,
         showStarterPrompts: true,
         starterPrompts: [
-          "💼 What projects has he worked on?",
-          "🧠 Tell me about his AI work",
-          "📈 What are his key outcomes?",
-          "🤝 How does he lead teams?"
+          "\ud83d\udcbc What projects has he worked on?",
+          "\ud83e\udde0 Tell me about his AI work",
+          "\ud83d\udcc8 What are his key outcomes?",
+          "\ud83e\udd1d How does he lead teams?"
         ]
       }
     };
 
-    // Apply configuration to the chat widget
-    const chatElement = document.querySelector('n8nchatui-inpage');
-    if (chatElement) {
-      // Set data attributes for configuration
-      Object.entries(chatConfig.chatWindow).forEach(([key, value]) => {
-        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
-          chatElement.setAttribute(`data-${key}`, value.toString());
-        } else if (Array.isArray(value)) {
-          // Handle array values like starterPrompts
-          chatElement.setAttribute(`data-${key}`, JSON.stringify(value));
-        }
-      });
-
-      // Also try setting the welcome message directly on the element
-      chatElement.setAttribute('data-welcome-message', chatConfig.chatWindow.welcomeMessage);
+    function configureChatWidget(retries = 10) {
+      const chatElement = document.querySelector('n8nchatui-inpage');
+      if (chatElement) {
+        Object.entries(chatConfig.chatWindow).forEach(([key, value]) => {
+          if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+            chatElement.setAttribute(`data-${key}`, value.toString());
+          } else if (Array.isArray(value)) {
+            chatElement.setAttribute(`data-${key}`, JSON.stringify(value));
+          }
+        });
+        chatElement.setAttribute('data-welcome-message', chatConfig.chatWindow.welcomeMessage);
+      } else if (retries > 0) {
+        setTimeout(() => configureChatWidget(retries - 1), 150);
+      } else {
+        console.warn('n8nchatui-inpage element not found after multiple attempts. Chat widget may not be configured.');
+      }
     }
+
+    configureChatWidget();
   }, []);
 
   return (

@@ -22,6 +22,7 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
         height: 0,
         width: 0,
         fontSize: 16,
+        showStarterPrompts: true,
         starterPrompts: [
           "Who are you?",
           "What do you do?",
@@ -38,6 +39,9 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
       Object.entries(chatConfig.chatWindow).forEach(([key, value]) => {
         if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
           chatElement.setAttribute(`data-${key}`, value.toString());
+        } else if (Array.isArray(value)) {
+          // Handle array values like starterPrompts
+          chatElement.setAttribute(`data-${key}`, JSON.stringify(value));
         }
       });
     }

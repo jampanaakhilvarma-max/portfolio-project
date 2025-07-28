@@ -68,9 +68,6 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
       {/* Enhanced heading with better visual hierarchy */}
       <div className="text-center py-8">
         <h2 className="text-2xl font-semibold text-gray-800 mb-3">Ask me about what I shipped, not just what I scoped</h2>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          I use AI not as a gimmick, but to reduce effort, improve precision, and scale intelligently.
-        </p>
       </div>
 
       {/* Chat Interface Heading */}

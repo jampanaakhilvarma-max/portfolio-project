@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styling for n8n Chat UI - Centered Layout with Heading */
+#n8n-chat-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* Center align the chat widget */
+n8nchatui-inpage {
+  height: 700px !important;
+  width: 800px !important;
+  display: block !important;
+  margin: 0 auto !important;
+  position: absolute !important;
+  top: 60% !important; /* Adjusted to account for heading */
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Ensure body has proper spacing */
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Make sure the chat container has proper dimensions */
+.chat-container {
+  height: 700px !important;
+  width: 800px !important;
+  margin: 0 auto !important;
+  position: absolute !important;
+  top: 60% !important; /* Adjusted to account for heading */
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  n8nchatui-inpage {
+    height: 600px !important;
+    width: 90% !important;
+    max-width: 700px !important;
+    top: 65% !important; /* More adjustment for mobile */
+  }
+  
+  .chat-container {
+    height: 600px !important;
+    width: 90% !important;
+    max-width: 700px !important;
+    top: 65% !important; /* More adjustment for mobile */
+  }
+}
+
+/* Ensure the header doesn't interfere with centering */
+header {
+  position: relative !important;
+  z-index: 10 !important;
+}

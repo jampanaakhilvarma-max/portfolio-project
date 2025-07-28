@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Akhil V's Portfolio with AI Chatbot - Product Manager specializing in AI-driven solutions and data-led decisions" />
+    <meta name="keywords" content="Akhil V, Product Manager, AI, Chatbot, Portfolio, Data-driven, User Experience" />
+    <meta name="author" content="Akhil V" />
+    <meta property="og:title" content="Akhil V - Product Manager Portfolio" />
+    <meta property="og:description" content="AI-driven Product Manager with expertise in data-led decisions and user-inspired solutions" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://your-domain.vercel.app" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Akhil V - Product Manager Portfolio" />
+    <meta name="twitter:description" content="AI-driven Product Manager with expertise in data-led decisions" />
+    <title>Akhil V - Product Manager Portfolio</title>
+    <link rel="preconnect" href="https://cdn.n8nchatui.com" />
+    <link rel="dns-prefetch" href="https://cdn.n8nchatui.com" />
+    <script src="https://cdn.n8nchatui.com/v1/embed.umd.js" defer></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Initialize chat after page loads
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          if (window.Chatbot) {
+            window.Chatbot.initFull({
+              "n8nChatUrl": "https://akhilaipractise1996.app.n8n.cloud/webhook/00fc39a9-1fb1-48ff-b00e-785268ecb0be/chat",
+              "metadata": {
+                "user": "Akhil's Portfolio Visitor"
+              },
+              "theme": {
+                "button": {
+                  "iconColor": "#4f46e5",
+                  "backgroundColor": "#4f46e5"
+                },
+                "chatWindow": {
+                  "borderRadiusStyle": "rounded",
+                  "avatarBorderRadius": 25,
+                  "messageBorderRadius": 12,
+                  "showTitle": true,
+                  "title": "Akhil's AI Assistant",
+                  "titleAvatarSrc": "https://www.svgrepo.com/show/339963/chat-bot.svg",
+                  "avatarSize": 40,
+                  "welcomeMessage": "Hi there! 👋 I'm Akhil's AI assistant. Ask me about his product work, AI projects, or data-led decisions!",
+                  "errorMessage": "I'm having trouble connecting right now. Please try again later.",
+                  "backgroundColor": "#ffffff",
+                  "height": 700,
+                  "width": 800,
+                  "fontSize": 16,
+                  "starterPrompts": [
+                    "Tell me about Akhil",
+                    "What projects has he worked on?",
+                    "What's his experience?",
+                    "How can I contact him?"
+                  ],
+                  "starterPromptFontSize": 15,
+                  "renderHTML": true,
+                  "clearChatOnReload": false,
+                  "showScrollbar": false,
+                  "botMessage": {
+                    "backgroundColor": "#f8fafc",
+                    "textColor": "#1e293b",
+                    "showAvatar": true,
+                    "avatarSrc": "https://www.svgrepo.com/show/334455/bot.svg"
+                  },
+                  "userMessage": {
+                    "backgroundColor": "#4f46e5",
+                    "textColor": "#ffffff",
+                    "showAvatar": true,
+                    "avatarSrc": "https://www.svgrepo.com/show/532363/user-alt-1.svg"
+                  },
+                  "textInput": {
+                    "placeholder": "Ask me about Akhil's work...",
+                    "backgroundColor": "#ffffff",
+                    "textColor": "#1e293b",
+                    "sendButtonColor": "#4f46e5",
+                    "maxChars": 500,
+                    "maxCharsWarningMessage": "Message is too long. Please keep it under 500 characters.",
+                    "autoFocus": false,
+                    "borderRadius": 12,
+                    "sendButtonBorderRadius": 50
+                  },
+                  "uploadsConfig": {
+                    "enabled": false,
+                    "acceptFileTypes": [],
+                    "maxFiles": 0,
+                    "maxSizeInMB": 0
+                  },
+                  "voiceInputConfig": {
+                    "enabled": false,
+                    "maxRecordingTime": 15,
+                    "recordingNotSupportedMessage": "Voice input is not available in this chat."
+                  }
+                }
+              }
+            });
+          }
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

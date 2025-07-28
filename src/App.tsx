@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import ChatbotPage from './components/ChatbotPage';
 import PortfolioPage from './components/PortfolioPage';
 import CaseStudyPage from './components/CaseStudyPage';
@@ -7,7 +7,9 @@ import CaseStudyPage from './components/CaseStudyPage';
 // Wrapper component to use useNavigate hook
 const ChatbotPageWrapper = () => {
   const navigate = useNavigate();
-  return <ChatbotPage onSkip={() => navigate('/portfolio')} />;
+  const location = useLocation();
+  // Use location.key as a unique key to force remount on navigation
+  return <ChatbotPage key={location.key} onSkip={() => navigate('/portfolio')} />;
 };
 
 const PortfolioPageWrapper = () => {

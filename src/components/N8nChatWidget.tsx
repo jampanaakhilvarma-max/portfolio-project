@@ -1,10 +1,48 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 interface N8nChatWidgetProps {
   onSkip: () => void;
 }
 
 const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
+  useEffect(() => {
+    // Configure N8N Chat Widget
+    const chatConfig = {
+      chatWindow: {
+        borderRadiusStyle: "rounded",
+        avatarBorderRadius: 25,
+        messageBorderRadius: 6,
+        showTitle: true,
+        title: "Akhil Varma - Product Manager",
+        titleAvatarSrc: "https://www.svgrepo.com/show/339963/chat-bot.svg",
+        avatarSize: 40,
+        welcomeMessage: "Hello! I'm Akhil, a Product Manager specializing in AI and data-driven solutions. Ask me anything about my work and experience!",
+        errorMessage: "Please connect me to n8n first",
+        backgroundColor: "#ffffff",
+        height: 0,
+        width: 0,
+        fontSize: 16,
+        starterPrompts: [
+          "Who are you?",
+          "What do you do?",
+          "Tell me about your experience",
+          "What are your key achievements?"
+        ]
+      }
+    };
+
+    // Apply configuration to the chat widget
+    const chatElement = document.querySelector('n8nchatui-inpage');
+    if (chatElement) {
+      // Set data attributes for configuration
+      Object.entries(chatConfig.chatWindow).forEach(([key, value]) => {
+        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+          chatElement.setAttribute(`data-${key}`, value.toString());
+        }
+      });
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex flex-col">
       {/* Simple Header */}

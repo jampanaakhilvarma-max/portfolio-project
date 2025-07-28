@@ -16,7 +16,7 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
         title: "Akhil Varma - Product Manager",
         titleAvatarSrc: "https://www.svgrepo.com/show/339963/chat-bot.svg",
         avatarSize: 40,
-        welcomeMessage: "Hello! I'm Akhil, a Product Manager specializing in AI and data-driven solutions. Ask me anything about my work and experience!",
+        welcomeMessage: "Hi! I can walk you through Akhil Varma's product leadership, AI-driven projects, and key outcomes. Ask away — from roadmaps to results.",
         errorMessage: "Please connect me to n8n first",
         backgroundColor: "#ffffff",
         height: 0,

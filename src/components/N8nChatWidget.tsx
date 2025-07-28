@@ -57,6 +57,8 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
         if (containerRef.current && !chatElementRef.current) {
           const chatElement = document.createElement('n8nchatui-inpage');
           chatElement.setAttribute('data-welcome-message', chatConfig.chatWindow.welcomeMessage);
+          // Set the chat backend URL
+          chatElement.setAttribute('data-n8n-chat-url', 'https://akhilaipractise1996.app.n8n.cloud/webhook/00fc39a9-1fb1-48ff-b00e-785268ecb0be/chat');
           containerRef.current.appendChild(chatElement);
           chatElementRef.current = chatElement;
           
@@ -70,6 +72,8 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
         if (containerRef.current && !chatElementRef.current) {
           const chatElement = document.createElement('n8nchatui-inpage');
           chatElement.setAttribute('data-welcome-message', chatConfig.chatWindow.welcomeMessage);
+          // Set the chat backend URL
+          chatElement.setAttribute('data-n8n-chat-url', 'https://akhilaipractise1996.app.n8n.cloud/webhook/00fc39a9-1fb1-48ff-b00e-785268ecb0be/chat');
           containerRef.current.appendChild(chatElement);
           chatElementRef.current = chatElement;
           

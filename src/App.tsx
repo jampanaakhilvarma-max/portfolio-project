@@ -21,12 +21,23 @@ const CaseStudyPage = () => {
   );
 };
 
+// Wrapper component to use useNavigate hook
+const ChatbotPageWrapper = () => {
+  const navigate = useNavigate();
+  return <ChatbotPage onSkip={() => navigate('/portfolio')} />;
+};
+
+const PortfolioPageWrapper = () => {
+  const navigate = useNavigate();
+  return <PortfolioPage onBackToChat={() => navigate('/')} />;
+};
+
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<ChatbotPage onSkip={() => window.location.assign('/portfolio')} />} />
-        <Route path="/portfolio" element={<PortfolioPage onBackToChat={() => window.location.assign('/')} />} />
+        <Route path="/" element={<ChatbotPageWrapper />} />
+        <Route path="/portfolio" element={<PortfolioPageWrapper />} />
         <Route path="/case-study/:id" element={<CaseStudyPage />} />
       </Routes>
     </Router>

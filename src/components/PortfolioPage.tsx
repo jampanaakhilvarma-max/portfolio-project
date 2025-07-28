@@ -22,7 +22,7 @@ const PortfolioPage: React.FC<PortfolioPageProps> = ({ onBackToChat }) => {
               <a href="#projects" className="text-sm sm:text-base text-gray-700 hover:text-gray-900 transition-colors">Projects</a>
             </div>
             <button
-              onClick={() => window.location.replace('/')}
+              onClick={() => { window.location.href = '/'; }}
               className="flex items-center space-x-2 px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base"
             >
               <MessageCircle className="w-4 h-4" />

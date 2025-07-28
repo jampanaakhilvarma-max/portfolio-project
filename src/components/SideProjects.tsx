@@ -1,62 +1,27 @@
 import React from 'react';
-import { ExternalLink, Github, Calendar, Zap, Code, Lightbulb } from 'lucide-react';
+import { Zap, Code, Lightbulb } from 'lucide-react';
 
 const SideProjects: React.FC = () => {
   const projects = [
     {
-      title: 'AI Product Assistant',
-      description: 'A ChatGPT-powered tool that helps product managers generate PRDs, user stories, and roadmaps.',
-      image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600',
-      category: 'AI/ML',
-      status: 'Live',
-      technologies: ['OpenAI API', 'React', 'Node.js'],
-      github: '#',
+      title: '🔢 Personalized Feed Ranking Engine',
+      description: 'Boosted feed engagement by 22% through algorithmic ranking based on behavioral signals and content relevance.',
       demo: '#',
-      timeline: '2023'
     },
     {
-      title: 'StartupMetrics Dashboard',
-      description: 'Real-time dashboard for tracking key startup metrics and KPIs with beautiful visualizations.',
-      image: 'https://images.pexels.com/photos/590020/pexels-photo-590020.jpeg?auto=compress&cs=tinysrgb&w=600',
-      category: 'Analytics',
-      status: 'Beta',
-      technologies: ['D3.js', 'Python', 'PostgreSQL'],
-      github: '#',
+      title: '🔍 Attrition Risk Predictor',
+      description: 'Built a high-precision model to proactively flag at-risk employees, reducing voluntary attrition by 8 pp YoY.',
       demo: '#',
-      timeline: '2023'
     },
     {
-      title: 'FeatureFeedback Collector',
-      description: 'Widget for collecting and prioritizing user feedback directly from your product interface.',
-      image: 'https://images.pexels.com/photos/3184416/pexels-photo-3184416.jpeg?auto=compress&cs=tinysrgb&w=600',
-      category: 'User Research',
-      status: 'Prototype',
-      technologies: ['Vue.js', 'Firebase', 'Tailwind'],
-      github: '#',
+      title: '🤖 AI-Powered Job Recommender for Talent Ops',
+      description: 'Streamlined internal job-posting workflows using LLM embeddings, cutting manual effort by 80%.',
       demo: '#',
-      timeline: '2022'
     },
     {
-      title: 'PMToolkit',
-      description: 'Collection of product management templates, frameworks, and calculators for everyday PM tasks.',
-      image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600',
-      category: 'Productivity',
-      status: 'Live',
-      technologies: ['React', 'TypeScript', 'Vercel'],
-      github: '#',
+      title: '🎧 Automated Podcast Summarizer',
+      description: 'Reduced weekly research time by 50% with a custom summarization pipeline for long-form audio content.',
       demo: '#',
-      timeline: '2022'
-    },
-    {
-      title: 'UserJourney Mapper',
-      description: 'Interactive tool for creating and sharing user journey maps with team collaboration features.',
-      image: 'https://images.pexels.com/photos/3184299/pexels-photo-3184299.jpeg?auto=compress&cs=tinysrgb&w=600',
-      category: 'UX Design',
-      status: 'Development',
-      technologies: ['React', 'Canvas API', 'WebSocket'],
-      github: '#',
-      demo: '#',
-      timeline: '2023'
     },
   ];
 
@@ -98,72 +63,19 @@ const SideProjects: React.FC = () => {
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <div key={index} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
-              {/* Project Image */}
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute top-4 left-4 flex items-center space-x-2">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
-                    {project.status}
-                  </span>
-                  <div className="bg-white/90 backdrop-blur-md rounded-full p-1">
-                    {React.createElement(getCategoryIcon(project.category), { 
-                      className: "w-4 h-4 text-gray-700" 
-                    })}
-                  </div>
-                </div>
-              </div>
-
-              {/* Project Content */}
-              <div className="p-6 space-y-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xl font-bold text-gray-900">{project.title}</h3>
-                  <div className="flex items-center space-x-1 text-sm text-gray-500">
-                    <Calendar className="w-4 h-4" />
-                    <span>{project.timeline}</span>
-                  </div>
-                </div>
-
-                <p className="text-gray-600 text-sm leading-relaxed">
-                  {project.description}
-                </p>
-
-                <div className="space-y-3">
-                  <div className="text-xs text-gray-500 uppercase tracking-wide font-medium">
-                    {project.category}
-                  </div>
-                  <div className="flex flex-wrap gap-1">
-                    {project.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex space-x-3 pt-4">
-                  <a
-                    href={project.demo}
-                    className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>Demo</span>
-                  </a>
-                  <a
-                    href={project.github}
-                    className="flex items-center justify-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-                  >
-                    <Github className="w-4 h-4" />
-                  </a>
-                </div>
+            <div key={index} className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group p-6 flex flex-col gap-2 h-full justify-between">
+              <h3 className="text-xl font-bold text-gray-900 mb-1">{project.title}</h3>
+              <div className="text-gray-700 text-sm mb-2">{project.description}</div>
+              <div className="flex-grow"></div>
+              <div className="pt-2 flex items-end">
+                <a
+                  href={project.demo}
+                  className="inline-flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span>Demo</span>
+                </a>
               </div>
             </div>
           ))}

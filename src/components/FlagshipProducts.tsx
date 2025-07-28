@@ -6,27 +6,37 @@ const FlagshipProducts: React.FC = () => {
   const products = [
     {
       title: 'Dex HCM',
-      description: 'A unified HR‑tech platform that reimagined the end‑to‑end employee journey across various organizations. Drove user engagment by 90% to 6k Monthly active users',
-      image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: 'A unified HR‑tech platform that reimagined the end‑to‑end employee journey across various organizations. Drove user engagment by 90% to 15k Monthly active users',
+      image: '/assets/dex-logo.png',
       metrics: [
-        { label: 'Users', value: '6k+', icon: Users },
-        { label: 'Monthly Active Users', value: '6K+', icon: TrendingUp },
+        { label: 'Users', value: '15k+', icon: Users },
+        { label: 'Monthly Active Users', value: '15K+', icon: TrendingUp },
         { label: 'Growth', value: '100%', icon: Award }
       ],
-      technologies: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
+      productSkills: [
+        'Product Vision & Strategic Thinking',
+        'Data-Informed Prioritization & Roadmapping',
+        'AI-Driven Product Innovation',
+        'Cross-Functional Leadership & Execution'
+      ],
       timeline: '2023 - Present',
       link: '#'
     },
     {
       title: 'Dex Workbench',
-      description: 'Enterprise-grade analytics platform that provides actionable insights for Fortune 500 companies. Increased user engagement by 400%.',
-      image: 'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=800',
+      description: 'Dex Workbench is a centralized talent orchestration platform designed to manage the entire talent lifecycle from onboarding to career growth. Automated and eliminated 90% of manual tasks',
+      image: '/assets/wb-logo.png',
       metrics: [
-        { label: 'Enterprise Clients', value: '150+', icon: Users },
-        { label: 'Data Points', value: '10B+', icon: TrendingUp },
-        { label: 'Retention', value: '95%', icon: Award }
+        { label: 'Automation', value: '90%', icon: Users },
+        { label: 'Avg. Bench Duration Reduction', value: '80%', icon: TrendingUp },
+        { label: 'NPS', value: '70%', icon: Award }
       ],
-      technologies: ['Python', 'React', 'D3.js', 'MongoDB'],
+      productSkills: [
+        'Intelligent Workflow Automation',
+        'Enterprise UX Design for Internal Tools',
+        'Applied AI Productization',
+        'Change Management & Product Evangelism'
+      ],
       timeline: '2021 - 2022',
       link: '#'
     },
@@ -91,16 +101,16 @@ const FlagshipProducts: React.FC = () => {
                   ))}
                 </div>
 
-                {/* Technologies */}
+                {/* Product Skills */}
                 <div className="space-y-3">
                   <h4 className="text-sm font-medium text-gray-900">Product Skills</h4>
                   <div className="flex flex-wrap gap-2">
-                    {product.technologies.map((tech, techIndex) => (
+                    {product.productSkills.map((skill, skillIndex) => (
                       <span
-                        key={techIndex}
+                        key={skillIndex}
                         className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium"
                       >
-                        {tech}
+                        {skill}
                       </span>
                     ))}
                   </div>
@@ -115,9 +125,6 @@ const FlagshipProducts: React.FC = () => {
                     <span>View Case Study</span>
                     <ExternalLink className="w-4 h-4" />
                   </Link>
-                  <button className="px-6 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-colors">
-                    Learn More
-                  </button>
                 </div>
               </div>
             </div>

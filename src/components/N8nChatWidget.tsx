@@ -16,7 +16,7 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
         title: "Akhil Varma - AI-Driven Product Leader",
         titleAvatarSrc: "https://www.svgrepo.com/show/339963/chat-bot.svg",
         avatarSize: 40,
-        welcomeMessage: "Explore Akhil's journey as a Product Manager delivering AI-powered solutions that drive business impact.",
+        welcomeMessage: "Hi! I can walk you through Akhil Varma's product leadership, AI-driven projects, and key outcomes. Ask away — from roadmaps to results.",
         errorMessage: "Please connect me to n8n first",
         backgroundColor: "#ffffff",
         height: 0,
@@ -44,6 +44,9 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
           chatElement.setAttribute(`data-${key}`, JSON.stringify(value));
         }
       });
+
+      // Also try setting the welcome message directly on the element
+      chatElement.setAttribute('data-welcome-message', chatConfig.chatWindow.welcomeMessage);
     }
   }, []);
 
@@ -77,7 +80,7 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
 
       {/* N8N Chat UI Container - Full Window Mode */}
       <div className="flex-1 w-full">
-        <n8nchatui-inpage></n8nchatui-inpage>
+        <n8nchatui-inpage data-welcome-message="Hi! I can walk you through Akhil Varma's product leadership, AI-driven projects, and key outcomes. Ask away — from roadmaps to results."></n8nchatui-inpage>
       </div>
     </div>
   );

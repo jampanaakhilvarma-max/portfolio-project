@@ -12,21 +12,25 @@
   position: relative;
 }
 
-/* Responsive mobile support */
+/* Responsive mobile support with 100svh and flex layout */
 @media (max-width: 768px) {
-  #n8n-chat-container {
-    height: 100dvh !important;
-    max-height: 100dvh !important;
-    min-height: 100dvh !important;
-    border-radius: 0 !important;
-  }
+  #n8n-chat-container,
   .n8n-chat,
   .n8n-chat-widget,
   .n8n-chat-window {
-    height: 100dvh !important;
-    max-height: 100dvh !important;
-    min-height: 100dvh !important;
+    height: 100svh !important;
+    max-height: 100svh !important;
+    min-height: 100svh !important;
     border-radius: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .n8n-chat-messages {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    max-height: 100% !important;
+    height: auto !important;
+    overflow-y: auto !important;
   }
 }
 
@@ -87,9 +91,7 @@
 
 @media (max-width: 768px) {
   .n8n-chat-messages {
-    height: calc(100dvh - 120px) !important;
-    max-height: calc(100dvh - 120px) !important;
-    min-height: calc(100dvh - 120px) !important;
+    /* Now handled by flex above */
   }
 }
 
@@ -127,10 +129,12 @@
 
 @media (max-width: 768px) {
   .n8n-chat {
-    height: 100dvh !important;
-    max-height: 100dvh !important;
-    min-height: 100dvh !important;
+    height: 100svh !important;
+    max-height: 100svh !important;
+    min-height: 100svh !important;
     border-radius: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 }
 

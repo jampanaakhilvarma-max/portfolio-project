@@ -13,15 +13,28 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['react-router-dom'],
+          lucide: ['lucide-react'],
+          n8n: ['@n8n/chat'],
         },
+      },
+    },
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
       },
     },
   },
   optimizeDeps: {
-    exclude: ['lucide-react'],
+    include: ['react', 'react-dom', 'react-router-dom'],
+    exclude: ['@n8n/chat'],
   },
   server: {
     port: 5173,
+    host: true,
+  },
+  preview: {
+    port: 4173,
     host: true,
   },
 });

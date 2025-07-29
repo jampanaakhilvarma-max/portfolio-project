@@ -1,406 +1,612 @@
-import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, Users, Clock, TrendingUp, Award, CheckCircle, Target, Zap, Star } from 'lucide-react';
+import React from 'react';
+import { ArrowLeft, Users, TrendingUp, Clock, MessageCircle, Award, Zap, Target, BarChart3, CheckCircle } from 'lucide-react';
 
-const CaseStudyPage: React.FC = () => {
-  // Scroll to top on mount
-  useEffect(() => {
+interface CaseStudyPageProps {
+  onBack: () => void;
+}
+
+const CaseStudyPage: React.FC<CaseStudyPageProps> = ({ onBack }) => {
+  // Scroll to top when component mounts
+  React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const navigate = useNavigate();
-  const { id } = useParams();
-  console.log('DEBUG: CaseStudyPage id =', id);
-
-  const caseStudies = {
-    '0': {
-      title: 'Dex HCM Transformation Story',
-      subtitle: 'HR-Tech platform serving 15,000 employees across 11 countries',
-      hero: {
-        problem: 'June 2024. Our 15,000 colleagues—scattered across client sites, home offices, and HQs—opened DEX, the "single HR hub," yet still felt disconnected.',
-        quote: '"I have no idea what\'s happening outside my project," one engineer admitted.',
-        metrics: [
-          { label: 'Time Lost', value: '45 min/week', description: 'hunting info across 7+ tools' },
-          { label: 'Legacy MAU', value: '5%', description: 'social hub buried in portal' },
-          { label: 'Compliance', value: '<10%', description: 'timesheet compliance' }
-        ]
-      },
-      vision: {
-        title: 'My Vision',
-        description: 'Empower every employee with intuitive, connected workflows that spark engagement—no portal sprawl, no steep learning curves.',
-        kpi: 'North-star KPI: < 10 min weekly task-hunting time.'
-      },
-      problems: [
-        {
-          pain: 'Tool Chaos',
-          reality: '7+ HR & IT portals, each with unique UX'
-        },
-        {
-          pain: 'Lost Time',
-          reality: '45 min/week per employee wasted hunting tasks/info'
-        },
-        {
-          pain: 'Low Engagement',
-          reality: '"Social hub" MAU at 5%'
-        },
-        {
-          pain: 'Opaque Growth',
-          reality: 'No clear career or learning visibility'
-        }
-      ],
-      solution: {
-        title: 'My Solution: A 4-Pillar Engagement Stack',
-        pillars: [
-          {
-            name: 'Unified Workspace (Q1 \'25)',
-            description: 'Timesheets, leave, payslips, learning, news—all in one view',
-            impact: 'Task-hunting reduced 45 → 12 min'
-          },
-          {
-            name: 'Dex Smart Feed (Q2 \'25)',
-            description: 'Recommender system surfaces relevant updates by category, decay & user similarity',
-            impact: 'MAU grew 5 → 35% in 10 weeks'
-          },
-          {
-            name: 'Gamified Workflows (Q3 \'25)',
-            description: 'Coins, tiers, and rewards for tasks like timesheets',
-            impact: 'On-time submissions 9 → 89%'
-          },
-          {
-            name: '"Hey Dex" Chatbot (Q3 \'25)',
-            description: '24/7 HR+IT help, ticket auto-gen',
-            impact: 'Resolved 70% of help-desk backlog'
-          }
-        ]
-      },
-      transformation: {
-        before: ['External redirects', 'Low visibility', 'Static content'],
-        after: ['Embedded modules', 'Personalized channels', 'Gamified flows']
-      },
-      journey: [
-        { phase: 'Onboarding', description: 'auto-setup profiles, guided start' },
-        { phase: 'Daily Work', description: 'hub for tasks, news, support' },
-        { phase: 'Project Change', description: 'alerts + one-click reassignment' },
-        { phase: 'Growth', description: 'skill nudges, learning paths, rewards' },
-        { phase: 'Alumni', description: 'exit portal & future connect' }
-      ],
-      impact: [
-        { metric: 'Monthly Engagement (MAU)', before: '5%', after: '60%', delta: '+55 pp' },
-        { metric: 'Task-Hunting Time', before: '45 min', after: '12 min', delta: '-33 min' },
-        { metric: 'On-Time Timesheets', before: '9%', after: '89%', delta: '+80 pp' },
-        { metric: 'Help-Desk Backlog', before: '100%', after: '30%', delta: '-70%' },
-        { metric: 'Employee NPS', before: '-', after: '+23', delta: '+23' }
-      ],
-      role: [
-        'Product Leadership: Defined north-star KPI, owned roadmap, aligned stakeholders',
-        'Prototyping: Built first recommender MVP in Python (18% lift in A/B tests)',
-        'Change Management: Led DEX Week launch, 4,000 profiles activated in 48h',
-        'Discovery: Fortnightly Hotjar, in-app surveys for continuous iteration'
-      ],
-      playbook: [
-        { phase: 'Ideation', actions: 'Synthesized replays, 40+ user interviews, analytics' },
-        { phase: 'Selection', actions: 'Prioritized impact vs. effort; launched 4-pillar roadmap' },
-        { phase: 'Design', actions: 'Prototyped, iterated fast; tested recommender with Python MVP' },
-        { phase: 'Delivery', actions: 'Cross-functional squads, exec alignment, quarterly launches' }
-      ],
-      testimonials: [
-        {
-          quote: '"Timesheets feel like leveling up in a game now—no more Friday panic!"',
-          author: 'Front-End Engineer, Poland'
-        },
-        {
-          quote: '"Dex Feed keeps me in the loop with HQ without inbox overload."',
-          author: 'Consultant, Philippines'
-        },
-        {
-          quote: '"Asking "Hey Dex" saved me 20 minutes finding the leave policy."',
-          author: 'Project Manager, USA'
-        }
-      ]
-    },
-    '1': {
-      title: 'Dex Workbench – From Bench Chaos to Talent Intelligence',
-      subtitle: 'How I led end-to-end product design, strategy, and go-to-market to transform talent deployment at Altimetrik',
-      hero: {
-        problem: 'Fragmented tools, high bench time, limited visibility, and no growth signal led to delayed staffing, missed revenue, and frustrated talent.',
-        quote: '“Workbench transformed talent chaos into talent velocity.”',
-        metrics: [
-          { label: 'Avg. Bench Duration', value: '12 days', description: '' },
-          { label: 'Time to Recommend', value: '6–8 hours', description: '' },
-          { label: 'Match Accuracy', value: 'manual', description: '' },
-          { label: 'Manual Work', value: '100%', description: '' }
-        ]
-      },
-      vision: {
-        title: 'Vision',
-        description: 'Design a unified, AI-powered platform that matches the right people to the right work within 48 hours—while unlocking transparent, actionable career pathways for every employee.',
-        kpi: 'North-star KPI: < 48 hours to match talent to work.'
-      },
-      problems: [
-        { pain: 'Fragmented tools', reality: 'Decisions lived in spreadsheets & inboxes' },
-        { pain: 'High bench time', reality: 'Avg. 12 business days of idle time' },
-        { pain: 'Limited visibility', reality: 'Leaders lacked real-time capacity & risk views' },
-        { pain: 'No growth signal', reality: 'Employees couldn’t see where to grow next' }
-      ],
-      transformation: {
-        before: ['Fragmented tools', 'Manual coordination', 'Opaque bench status'],
-        after: ['Unified platform', 'Automated workflows', 'AI-powered matching', 'Transparent career pathways']
-      },
-      journey: [
-        { phase: 'Bench', description: 'Talent enters the bench pool, skills and preferences captured' },
-        { phase: 'Matching', description: 'AI engine suggests best-fit roles within 48 hours' },
-        { phase: 'Deployment', description: 'Automated outreach and interview scheduling' },
-        { phase: 'Growth', description: 'Employees see actionable career pathways and feedback loops' },
-        { phase: 'Redeployment', description: 'Smart expiry and learning loops for continuous improvement' }
-      ],
-      playbook: [
-        { phase: 'Discovery', actions: '20+ interviews, mapped pain points, defined MVP scope' },
-        { phase: 'Design', actions: 'Figma prototypes, weekly design-review sprints, user stories' },
-        { phase: 'Delivery', actions: 'Launched v1 Kanban, v2 AI matching, v3 automation' },
-        { phase: 'Adoption', actions: 'Demo roadshows, onboarding, internal branding, 100+ users trained' }
-      ],
-      impact: [
-        { metric: 'Avg. Bench Duration', before: '12 days', after: '< 3 days', delta: '-9 days' },
-        { metric: 'Time to Recommend', before: '6–8 hours', after: '< 30 seconds', delta: '-6+ hours' },
-        { metric: 'Match Accuracy', before: 'Baseline', after: '+20%', delta: '+20%' },
-        { metric: 'Manual Coordination', before: '100%', after: '< 15%', delta: '-85%' },
-        { metric: 'NPS (Internal Users)', before: 'N/A', after: '72', delta: '+72' }
-      ],
-      testimonials: [
-        { quote: '“Workbench transformed talent chaos into talent velocity.”', author: 'SVP, Delivery' },
-        { quote: '“It feels like a sixth sense for staffing—making decisions before I even ask.”', author: 'Engagement Manager' }
-      ],
-      reflections: [
-        'Product ≠ Features: Real value came when data, workflow, and AI formed a system, not siloed tools.',
-        'Design Builds Trust: A single confidence bar and inline rationale helped users trust AI.',
-        'You Are the Sales Team: Especially in internal products, adoption is won by storytelling, not just specs.'
-      ],
-      lessons: [
-        'I’d introduce career mobility pathways earlier—matching is only half the user journey.',
-        'I’d embed usage analytics from day one to prioritize feature adoption.'
-      ],
-      epilogue: 'Today, Workbench is more than a bench management tool—it’s becoming Altimetrik’s talent orchestration platform. As we add gamified feedback loops, career pathing views, and organizational health insights, we’re moving from placement to progression. And for me—this wasn’t just building a product. It was building a belief: that internal talent deserves the same rigor, intelligence, and love we give our customers.'
-    }
-  };
-
-  const caseStudy = caseStudies[id as keyof typeof caseStudies];
-
-  if (!caseStudy) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Case Study Not Found</h1>
-          <button
-            onClick={() => navigate('/portfolio')}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Back to Portfolio
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex flex-col">
-      {/* Sticky Header - Same as Hero Page */}
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      {/* Header */}
       <header className="bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex flex-col">
-            <h1 className="text-xl font-bold text-[#1E293B] leading-tight">Akhil Varma | AI Product Manager</h1>
-            <p className="text-sm text-gray-600 mt-2 leading-relaxed font-medium">Portfolio of Impact-First Digital Products</p>
-          </div>
           <button
-            onClick={() => navigate('/portfolio')}
-            className="flex items-center space-x-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all transform hover:scale-105 shadow-lg"
+            onClick={onBack}
+            className="flex items-center space-x-2 text-gray-600 hover:text-gray-800 transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-5 h-5" />
             <span>Back to Portfolio</span>
           </button>
+          <div className="text-center">
+            <h1 className="text-xl font-bold text-gray-800">Dex HCM: Rebuilding Culture Through Product-Led Growth</h1>
+            <p className="text-sm text-gray-600">HR-Tech platform serving 15,000 employees</p>
+          </div>
+          <div className="w-24"></div>
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto px-4 py-8 w-full">
+      {/* Main Content */}
+      <div className="max-w-4xl mx-auto px-6 py-8">
+        
         {/* Hero Section */}
-        <div className="text-center mb-16">
-          <figure className="flex flex-col items-center justify-center mb-6">
-            {/* Show wb-logo.png only for Dex Workbench (caseStudy 1) */}
-            {id === '1' && (
-              <img src="/assets/wb-logo.png" alt="Dex Workbench Logo" className="w-32 h-32 object-contain mb-4" />
-            )}
-            {id !== '1' && (
-              <img src="/assets/dex-logo.png" alt="Case Study Hero" className="w-full max-w-lg rounded-xl object-cover mx-auto" />
-            )}
-          </figure>
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">{caseStudy.title}</h1>
-          <p className="text-xl text-gray-600 mb-8">{caseStudy.subtitle}</p>
-          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 mb-8">
-            {caseStudy.hero?.problem && (
-              <p className="text-lg text-gray-700 mb-4">{caseStudy.hero.problem}</p>
-            )}
-            {caseStudy.hero?.metrics && caseStudy.hero.metrics.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
-                {caseStudy.hero.metrics.map((metric, idx) => (
-                  <div key={idx} className="bg-white rounded-xl p-4 shadow-sm">
-                    <div className="text-2xl font-bold text-gray-900">{metric.value}</div>
-                    <div className="text-sm font-medium text-gray-700">{metric.label}</div>
-              </div>
-                ))}
-              </div>
-            )}
-            {caseStudy.hero?.quote && (
-              <p className="text-lg text-gray-700 mt-4">{caseStudy.hero.quote}</p>
-            )}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center space-x-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full mb-6">
+            <Users className="w-4 h-4" />
+            <span className="text-sm font-medium">HR-Tech Platform</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Dex HCM: Rebuilding Culture Through Product-Led Growth
+          </h1>
+          <p className="text-xl text-gray-600 mb-6">
+            HR-Tech platform serving 15,000 employees
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
+            <div className="flex items-center space-x-1">
+              <Clock className="w-4 h-4" />
+              <span>June 2024 - Present</span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <Users className="w-4 h-4" />
+              <span>15,000+ Employees</span>
+            </div>
+            <div className="flex items-center space-x-1">
+              <TrendingUp className="w-4 h-4" />
+              <span>60% MAU Growth</span>
+            </div>
           </div>
         </div>
 
-        {/* Vision Section */}
-        {caseStudy.vision && (
-        <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">{caseStudy.vision.title || 'Vision'}</h2>
-          <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <p className="text-lg text-gray-900 mb-4">{caseStudy.vision.description}</p>
-              {caseStudy.vision.kpi && (
-            <div className="bg-blue-100 rounded-xl p-6">
-              <div className="flex items-center space-x-3">
-                <Target className="w-8 h-8 text-blue-600" />
-                <div>
-                  <div className="text-base font-semibold text-blue-900">North-star KPI</div>
-                      <div className="text-base text-blue-700">{caseStudy.vision.kpi}</div>
-                    </div>
+        {/* Chapter 1 */}
+        <section className="mb-16">
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Chapter 1: The Silence in the System</h2>
+            <div className="grid md:grid-cols-2 gap-8 items-center mb-6">
+              <div>
+                <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                  When I joined Dex in June 2024, the platform looked fine on the surface. But beneath the UI and workflows, something critical was missing: employee connection and engagement.
+                </p>
+                <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                  DEX was intended to be the HR nerve center for 15,000 employees. But it had become a digital inbox—transactional, impersonal, invisible. A tool for compliance, not community. One engineer told me:
+                </p>
+                <blockquote className="border-l-4 border-blue-500 pl-6 italic text-gray-700 mb-6">
+                  "I have no idea what's happening outside my project."
+                </blockquote>
+              </div>
+              <div className="flex justify-center">
+                <img 
+                  src="/assets/dex-logo.png" 
+                  alt="Dex Logo" 
+                  className="rounded-lg shadow-lg max-w-full h-auto"
+                />
+              </div>
+            </div>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              This wasn't a tech issue. It was a product-market misfit. Our internal users—our customers—weren't bought in. Engagement data revealed the truth:
+            </p>
+            <div className="grid md:grid-cols-3 gap-6 mb-6">
+              <div className="bg-orange-50 p-4 rounded-lg">
+                <div className="text-2xl font-bold text-orange-600 mb-2">45 min</div>
+                <div className="text-sm text-orange-700">Lost per week in context-switching across 7+ systems</div>
+              </div>
+              <div className="bg-orange-50 p-4 rounded-lg">
+                <div className="text-2xl font-bold text-orange-600 mb-2">5%</div>
+                <div className="text-sm text-orange-700">"Social Hub" usage—buried in the portal</div>
+              </div>
+              <div className="bg-yellow-50 p-4 rounded-lg">
+                <div className="text-2xl font-bold text-yellow-600 mb-2">&lt;10%</div>
+                <div className="text-sm text-yellow-700">Timesheet compliance—deep disengagement</div>
+              </div>
+            </div>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              DEX had functional architecture, but it lacked product resonance.
+            </p>
+          </div>
+        </section>
+
+        {/* Chapter 2 */}
+        <section className="mb-16">
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Chapter 2: Reframing the Problem</h2>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              The initial instinct was to optimize DEX as a tool—clean up flows, consolidate systems, and remove clutter. But the deeper insight was this: DEX didn't have an adoption problem. It had a meaning problem.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              Despite housing critical HR functions, DEX felt like a passive repository. I reframed the challenge from improving features to repositioning the product as a daily-value driver:
+            </p>
+            <blockquote className="border-l-4 border-blue-500 pl-6 italic text-gray-700 mb-6">
+              "What would it take for DEX to become the product employees actually wanted to open—engage with deeply, revisit frequently, and advocate for?"
+            </blockquote>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              That meant transitioning from a task router to a culture engine. From an admin tool to an experience platform.
+            </p>
+            <div className="bg-blue-50 p-6 rounded-lg mb-6">
+              <h3 className="text-xl font-semibold text-blue-900 mb-4">New North Star Metric</h3>
+              <div className="text-3xl font-bold text-blue-600 mb-2">50% Monthly Active Usage</div>
+              <div className="text-blue-700">6,000+ employees engaging with DEX every month</div>
+            </div>
+            <p className="text-lg text-gray-700 leading-relaxed">
+              This goal wasn't just operational—it was emotional. Saving time meant reducing frustration. Reducing frustration meant increasing trust.
+            </p>
+          </div>
+        </section>
+
+        {/* Chapter 3 */}
+        <section className="mb-16">
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Chapter 3: Diagnosing the Gaps (Jan '24 Baseline)</h2>
+            <div className="overflow-x-auto mb-6">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-200 px-4 py-3 text-left font-semibold">Friction Point</th>
+                    <th className="border border-gray-200 px-4 py-3 text-left font-semibold">Observation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Tool Chaos</td>
+                    <td className="border border-gray-200 px-4 py-3">7+ portals, no design consistency or SSO UX</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Task Time Waste</td>
+                    <td className="border border-gray-200 px-4 py-3">45 min/week spent navigating systems</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Engagement Vacuum</td>
+                    <td className="border border-gray-200 px-4 py-3">Social layer barely alive at 5% MAU</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Career Confusion</td>
+                    <td className="border border-gray-200 px-4 py-3">No discoverable growth paths or skill nudges</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400">
+              <p className="text-yellow-800 font-medium">
+                This audit formed our product problem statement: <strong>DEX is over-engineered for compliance and under-designed for connection.</strong>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Chapter 4 */}
+        <section className="mb-16">
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Chapter 4: Designing the Product-Led Stack</h2>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              As a PM, I led the creation of a 4-layer engagement roadmap, aligned with OKRs and quarterly marketing campaigns.
+            </p>
+            <div className="overflow-x-auto mb-6">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-200 px-4 py-3 text-left font-semibold">Module</th>
+                    <th className="border border-gray-200 px-4 py-3 text-left font-semibold">Core Value Prop</th>
+                    <th className="border border-gray-200 px-4 py-3 text-left font-semibold">Outcome</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Unified Workspace (Q1 '25)</td>
+                    <td className="border border-gray-200 px-4 py-3">Streamlined UX: one view for tasks, policies, payslips, learning</td>
+                    <td className="border border-gray-200 px-4 py-3">↓ Task-hunting time (supporting MAU increase)</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Dex Smart Feed (Q2 '25)</td>
+                    <td className="border border-gray-200 px-4 py-3">AI-powered news feed based on roles, behavior, time-decay</td>
+                    <td className="border border-gray-200 px-4 py-3">↑ MAU 5% → 35% in 10 weeks</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Gamified Workflows (Q3 '25)</td>
+                    <td className="border border-gray-200 px-4 py-3">Nudges + rewards for completion of routine chores</td>
+                    <td className="border border-gray-200 px-4 py-3">↑ On-time timesheets 9% → 89%</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 px-4 py-3 font-medium">"Hey Dex" AI Assistant (Q3 '25)</td>
+                    <td className="border border-gray-200 px-4 py-3">NLP-based chatbot for HR/IT queries with ticket automation</td>
+                    <td className="border border-gray-200 px-4 py-3">↓ Helpdesk load by 70%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-6 p-4 bg-blue-50 border-l-4 border-blue-400">
+              <p className="text-blue-800 font-medium">
+                Prioritization principle: <strong>Resolve friction first, then amplify motivation.</strong>
+              </p>
+            </div>
+            
+            {/* Images in order */}
+            <div className="grid md:grid-cols-2 gap-6 mt-8">
+              <div className="flex justify-center">
+                <img 
+                  src="/assets/dex-dashboard.png" 
+                  alt="Dex Dashboard - Unified workspace" 
+                  className="rounded-lg shadow-lg max-w-full h-auto"
+                />
+              </div>
+              <div className="flex justify-center">
+                <img 
+                  src="/assets/dex-feed.png" 
+                  alt="Dex Smart Feed - AI-powered engagement" 
+                  className="rounded-lg shadow-lg max-w-full h-auto"
+                />
+              </div>
+              <div className="flex justify-center">
+                <img 
+                  src="/assets/dex-gamification.png" 
+                  alt="Dex Gamified Workflows - Rewards and engagement" 
+                  className="rounded-lg shadow-lg max-w-full h-auto"
+                />
+              </div>
+              <div className="flex justify-center">
+                <img 
+                  src="/assets/dex-chatbot.png" 
+                  alt="Dex AI Assistant - Hey Dex chatbot" 
+                  className="rounded-lg shadow-lg max-w-full h-auto"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Chapter 5 */}
+        <section className="mb-16">
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Chapter 5: Activation Through UX & Marketing</h2>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              DEX didn't just need better features. It needed a launch moment.
+            </p>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              We framed the rollout as a campaign, not a deployment. During "DEX Week," we:
+            </p>
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold">Branded Tooltips</h4>
+                    <p className="text-sm text-gray-600">In-app walkthroughs and email nudges</p>
                   </div>
                 </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* Problems Section */}
-        {caseStudy.problems && caseStudy.problems.length > 0 && (
-        <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Problems</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {caseStudy.problems.map((problem, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                <h3 className="text-lg font-bold text-blue-800 mb-2">{problem.pain}</h3>
-                <p className="text-gray-700">{problem.reality}</p>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold">Usage Leaderboard</h4>
+                    <p className="text-sm text-gray-600">Gamified discovery across teams</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold">Internal Ambassadors</h4>
+                    <p className="text-sm text-gray-600">Regional champions promoting adoption</p>
+                  </div>
+                </div>
               </div>
-            ))}
+              <div className="bg-green-50 p-6 rounded-lg">
+                <h4 className="text-lg font-semibold text-green-800 mb-4">Results</h4>
+                <div className="space-y-3">
+                  <div className="flex justify-between">
+                    <span className="text-green-700">Profiles Completed:</span>
+                    <span className="font-bold text-green-800">4,000+ in 48 hours</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-green-700">Feature Adoption:</span>
+                    <span className="font-bold text-green-800">{'>'}2x in first month</span>
+                  </div>
+                </div>
           </div>
         </div>
-        )}
 
-        {/* Transformation Section */}
-        {caseStudy.transformation && (
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Experience Transformation</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-gray-50 rounded-xl p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">Before</h3>
-              <ul className="space-y-2">
-                {caseStudy.transformation.before.map((item, index) => (
-                  <li key={index} className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-white rounded-xl p-6 border border-green-200">
-              <h3 className="text-xl font-bold text-green-700 mb-4">After</h3>
-              <ul className="space-y-2">
-                {caseStudy.transformation.after.map((item, index) => (
-                  <li key={index} className="flex items-center space-x-2">
-                    <CheckCircle className="w-4 h-4 text-green-600" />
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-        )}
-
-        {/* Journey Section */}
-        {caseStudy.journey && (
-        <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Journey</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {caseStudy.journey.map((phase, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-4">
-                <h3 className="font-bold text-gray-900 mb-2">{phase.phase}</h3>
-                <p className="text-sm text-gray-600">{phase.description}</p>
+            {/* Before and After Section */}
+            <div className="mt-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Before & After</h3>
+              <div className="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h4 className="text-xl font-semibold text-orange-600 mb-4 flex items-center">
+                    <span className="w-3 h-3 bg-orange-500 rounded-full mr-3"></span>
+                    Before
+                  </h4>
+                  <div className="flex justify-center">
+                    <img 
+                      src="/assets/before.png" 
+                      alt="Before transformation" 
+                      className="rounded-lg shadow-lg max-w-full h-auto"
+                    />
+                  </div>
+                    </div>
+                <div>
+                  <h4 className="text-xl font-semibold text-green-600 mb-4 flex items-center">
+                    <span className="w-3 h-3 bg-green-500 rounded-full mr-3"></span>
+                    After
+                  </h4>
+                  <div className="flex justify-center">
+                    <img 
+                      src="/assets/dex-payslip.png" 
+                      alt="After transformation" 
+                      className="rounded-lg shadow-lg max-w-full h-auto"
+                    />
+                  </div>
+                </div>
               </div>
-            ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Chapter 6 */}
+        <section className="mb-16">
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Chapter 6: The Before & After</h2>
+            <div className="grid md:grid-cols-2 gap-8 mb-6">
+              <div>
+                <h3 className="text-xl font-semibold text-orange-600 mb-4 flex items-center">
+                  <span className="w-3 h-3 bg-orange-500 rounded-full mr-3"></span>
+                  Before
+                </h3>
+                <div className="space-y-4 mb-4">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700">External links and hard redirects</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700">One-way comms from HQ</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700">Workflows felt like chores</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-green-600 mb-4 flex items-center">
+                  <span className="w-3 h-3 bg-green-500 rounded-full mr-3"></span>
+                  After
+                </h3>
+                <div className="space-y-4 mb-4">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700">Unified, native experiences</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700">Dynamic channels for engagement</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-700">Gamified flows for routine tasks</p>
+                  </div>
           </div>
         </div>
-        )}
+            </div>
+            <div className="mt-8 p-4 bg-blue-50 border-l-4 border-blue-400">
+              <p className="text-blue-800 font-medium">
+                Transformation: <strong>From compliance → contribution. From checklists → culture.</strong>
+              </p>
+            </div>
+          </div>
+        </section>
 
-        {/* Impact Section */}
-        {caseStudy.impact && caseStudy.impact.length > 0 && (
-        <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Impact</h2>
+        {/* Chapter 7 */}
+        <section className="mb-16">
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Chapter 7: Full-Funnel Product Thinking</h2>
+            <p className="text-lg text-gray-700 leading-relaxed mb-6">
+              DEX now supports the entire employee lifecycle, mapped like a user journey:
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-blue-900 mb-2">Onboarding</h4>
+                <p className="text-sm text-blue-700">Automated provisioning, curated welcome content</p>
+              </div>
+              <div className="bg-green-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-green-900 mb-2">Activation</h4>
+                <p className="text-sm text-green-700">Task completion in {'<'}7 clicks, smart nudges</p>
+              </div>
+              <div className="bg-purple-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-purple-900 mb-2">Engagement</h4>
+                <p className="text-sm text-purple-700">Personalized news, learning, celebrations</p>
+        </div>
+              <div className="bg-orange-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-orange-900 mb-2">Retention</h4>
+                <p className="text-sm text-orange-700">Skill nudges, recognition loops, goal setting</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Chapter 8 */}
+        <section className="mb-16">
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Chapter 8: Key Outcomes (July '25)</h2>
           <div className="overflow-x-auto">
-            <table className="w-full bg-white rounded-xl shadow-sm">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Metric</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Before</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">After</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Δ</th>
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-200 px-4 py-3 text-left font-semibold">Metric</th>
+                    <th className="border border-gray-200 px-4 py-3 text-left font-semibold">Before</th>
+                    <th className="border border-gray-200 px-4 py-3 text-left font-semibold">After</th>
+                    <th className="border border-gray-200 px-4 py-3 text-left font-semibold">Δ</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
-                {caseStudy.impact.map((row, index) => (
-                  <tr key={index} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{row.metric}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{row.before}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{row.after}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-green-600">{row.delta}</td>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Monthly Active Users</td>
+                    <td className="border border-gray-200 px-4 py-3">5%</td>
+                    <td className="border border-gray-200 px-4 py-3">60%</td>
+                    <td className="border border-gray-200 px-4 py-3 text-green-600 font-bold">+55 pp</td>
                   </tr>
-                ))}
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Avg. Task Time</td>
+                    <td className="border border-gray-200 px-4 py-3">45 min</td>
+                    <td className="border border-gray-200 px-4 py-3">12 min</td>
+                    <td className="border border-gray-200 px-4 py-3 text-green-600 font-bold">–33 min</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Timesheet On-Time Rate</td>
+                    <td className="border border-gray-200 px-4 py-3">9%</td>
+                    <td className="border border-gray-200 px-4 py-3">89%</td>
+                    <td className="border border-gray-200 px-4 py-3 text-green-600 font-bold">+80 pp</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Helpdesk Load</td>
+                    <td className="border border-gray-200 px-4 py-3">100%</td>
+                    <td className="border border-gray-200 px-4 py-3">30%</td>
+                    <td className="border border-gray-200 px-4 py-3 text-green-600 font-bold">–70%</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Employee NPS</td>
+                    <td className="border border-gray-200 px-4 py-3">–</td>
+                    <td className="border border-gray-200 px-4 py-3">+23</td>
+                    <td className="border border-gray-200 px-4 py-3 text-green-600 font-bold">+23</td>
+                  </tr>
               </tbody>
             </table>
             </div>
+            <div className="mt-6 p-4 bg-green-50 border-l-4 border-green-400">
+              <p className="text-green-800">
+                Managers saved 2 hrs/week. Employees started advocating for Dex.
+              </p>
+            </div>
           </div>
-        )}
+        </section>
 
-        {/* Playbook Section */}
-        {caseStudy.playbook && (
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">My Playbook</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {caseStudy.playbook.map((phase, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-3">{phase.phase}</h3>
-                <p className="text-sm text-gray-600">{phase.actions}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        )}
-
-        {/* Testimonials Section */}
-        {caseStudy.testimonials && (
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">What People Say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {caseStudy.testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6">
-                <div className="flex items-center mb-4">
-                  <Star className="w-5 h-5 text-yellow-500 mr-1" />
-                  <Star className="w-5 h-5 text-yellow-500 mr-1" />
-                  <Star className="w-5 h-5 text-yellow-500 mr-1" />
-                  <Star className="w-5 h-5 text-yellow-500 mr-1" />
-                  <Star className="w-5 h-5 text-yellow-500" />
+        {/* Chapter 9 */}
+        <section className="mb-16">
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Chapter 9: My Role as Product Manager</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <Target className="w-5 h-5 text-blue-500 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold">Product Strategy</h4>
+                    <p className="text-sm text-gray-600">Framed opportunity, defined MAU-focused KPI, shaped 4-layer roadmap</p>
+                  </div>
                 </div>
-                <blockquote className="text-gray-700 mb-4 italic">{testimonial.quote}</blockquote>
-                <p className="text-sm font-medium text-gray-600">— {testimonial.author}</p>
+                <div className="flex items-start space-x-3">
+                  <TrendingUp className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold">Growth Tactics</h4>
+                    <p className="text-sm text-gray-600">Created launch playbooks with internal marketing hooks</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <Zap className="w-5 h-5 text-purple-500 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold">AI Prototyping</h4>
+                    <p className="text-sm text-gray-600">Built recommender MVP in Python → +18% relevance in A/B</p>
+                  </div>
+                </div>
               </div>
-            ))}
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3">
+                  <BarChart3 className="w-5 h-5 text-orange-500 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold">Discovery Ops</h4>
+                    <p className="text-sm text-gray-600">Fortnightly Hotjar + survey analysis → rapid learning loops</p>
           </div>
         </div>
-        )}
+                <div className="flex items-start space-x-3">
+                  <Users className="w-5 h-5 text-indigo-500 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold">Cross-Functional Leadership</h4>
+                    <p className="text-sm text-gray-600">Aligned design, engineering, comms, HRBPs</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Chapter 10 */}
+        <section className="mb-16">
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Chapter 10: The Playbook</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-50">
+                    <th className="border border-gray-200 px-4 py-3 text-left font-semibold">Phase</th>
+                    <th className="border border-gray-200 px-4 py-3 text-left font-semibold">What I Did</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Identify</td>
+                    <td className="border border-gray-200 px-4 py-3">Audited friction points across 7+ systems</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Validate</td>
+                    <td className="border border-gray-200 px-4 py-3">Interviewed 40 users + internal surveys to surface unmet needs</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Design</td>
+                    <td className="border border-gray-200 px-4 py-3">Prototyped key features and ran lightweight A/B tests</td>
+                  </tr>
+                  <tr className="bg-gray-50">
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Market</td>
+                    <td className="border border-gray-200 px-4 py-3">Packaged feature launches with narrative + embedded education</td>
+                  </tr>
+                  <tr>
+                    <td className="border border-gray-200 px-4 py-3 font-medium">Scale</td>
+                    <td className="border border-gray-200 px-4 py-3">Orchestrated squads + tracked KPIs across quarterly OKRs</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* Chapter 11 */}
+        <section className="mb-16">
+          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Chapter 11: Voice of the User</h2>
+            <div className="space-y-6">
+              <div className="bg-blue-50 p-6 rounded-lg">
+                <blockquote className="text-lg text-blue-800 italic mb-4">
+                  "Timesheets feel like leveling up in a game now—no more Friday panic!"
+                </blockquote>
+                <div className="text-sm text-blue-600">— Front-End Engineer</div>
+              </div>
+              <div className="bg-green-50 p-6 rounded-lg">
+                <blockquote className="text-lg text-green-800 italic mb-4">
+                  "Dex Feed actually keeps me in the loop with HQ without spamming my inbox."
+                </blockquote>
+                <div className="text-sm text-green-600">— Consultant</div>
+              </div>
+              <div className="bg-purple-50 p-6 rounded-lg">
+                <blockquote className="text-lg text-purple-800 italic mb-4">
+                  "Asking 'Hey Dex' saved me 20 minutes finding the leave policy."
+                </blockquote>
+                <div className="text-sm text-purple-600">— Project Manager</div>
+              </div>
+            </div>
+            <div className="mt-8 p-4 bg-gradient-to-r from-blue-50 to-purple-50 border-l-4 border-blue-400">
+              <p className="text-blue-800 font-medium">
+                Dex isn't just a tool anymore. It's a product with purpose—and a brand with a voice.
+              </p>
+          </div>
+        </div>
+        </section>
+
+        {/* Call to Action */}
+        <section className="text-center">
+          <button
+            onClick={onBack}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+          >
+            Back to Portfolio
+          </button>
+        </section>
+
       </div>
     </div>
   );

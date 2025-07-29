@@ -2,6 +2,139 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ensure n8n chat container takes full height */
+#n8n-chat-container {
+  height: 700px !important;
+  width: 100% !important;
+  max-width: 512px !important;
+  border-radius: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Override any conflicting styles */
+#n8n-chat-container .n8n-chat {
+  height: 700px !important;
+  width: 100% !important;
+  max-width: 512px !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+/* Ensure the chat widget fills the container */
+.n8n-chat-widget {
+  height: 700px !important;
+  width: 100% !important;
+  max-width: 512px !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+/* Custom styling for contained chat layout */
+.n8n-chat-window {
+  width: 100% !important;
+  height: 700px !important;
+  max-width: 512px !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+/* Hide the toggle button completely */
+.n8n-chat-toggle {
+  display: none !important;
+}
+
+/* Hide any toggle-related elements */
+[data-testid="chat-toggle"],
+.n8n-chat-toggle-button,
+.chat-toggle {
+  display: none !important;
+}
+
+/* Enhanced scroll for chat messages */
+.n8n-chat-messages {
+  height: calc(700px - 120px) !important;
+  max-height: calc(700px - 120px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  background: transparent !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #cbd5e1 #f1f5f9 !important;
+}
+
+/* Custom scrollbar styling for webkit browsers */
+.n8n-chat-messages::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.n8n-chat-messages::-webkit-scrollbar-track {
+  background: #f1f5f9 !important;
+  border-radius: 3px !important;
+}
+
+.n8n-chat-messages::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+  border-radius: 3px !important;
+}
+
+.n8n-chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
+}
+
+/* Force the chat to be visible and open */
+.n8n-chat {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  border-radius: 0 !important;
+  overflow: hidden !important;
+  height: 700px !important;
+  width: 100% !important;
+  max-width: 512px !important;
+  position: relative !important;
+}
+
+/* Remove rounded corners from all chat elements */
+.n8n-chat * {
+  border-radius: 0 !important;
+}
+
+/* Prevent chat from expanding beyond container */
+.n8n-chat,
+.n8n-chat-widget,
+.n8n-chat-window {
+  max-height: 700px !important;
+  max-width: 512px !important;
+}
+
+/* Ensure proper scroll behavior for all chat content */
+.n8n-chat-content,
+.n8n-chat-body,
+.n8n-chat-main {
+  overflow-y: auto !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #cbd5e1 #f1f5f9 !important;
+}
+
+/* Round the bottom edges of the actual text input field */
+.n8n-chat input[type="text"],
+.n8n-chat textarea,
+.n8n-chat input[type="search"],
+.n8n-chat .chat-input-field,
+.n8n-chat [data-testid="chat-input-field"],
+.n8n-chat input,
+.n8n-chat textarea {
+  border-bottom-left-radius: 0.5rem !important;
+  border-bottom-right-radius: 0.5rem !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
 /* Custom styling for n8n Chat UI - Centered Layout with Heading */
 #n8n-chat-container {
   height: 100%;
@@ -41,23 +174,40 @@ body {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  n8nchatui-inpage {
-    height: 600px !important;
-    width: 90% !important;
-    max-width: 700px !important;
-    top: 65% !important; /* More adjustment for mobile */
+  #n8n-chat-container {
+    height: 450px !important;
+    max-width: 100% !important;
   }
   
-  .chat-container {
-    height: 600px !important;
-    width: 90% !important;
-    max-width: 700px !important;
-    top: 65% !important; /* More adjustment for mobile */
+  #n8n-chat-container .n8n-chat {
+    height: 450px !important;
+    max-width: 100% !important;
   }
-}
-
-/* Ensure the header doesn't interfere with centering */
-header {
-  position: relative !important;
-  z-index: 10 !important;
+  
+  .n8n-chat-widget {
+    height: 450px !important;
+    max-width: 100% !important;
+  }
+  
+  .n8n-chat-window {
+    height: 450px !important;
+    max-width: 100% !important;
+  }
+  
+  .n8n-chat-messages {
+    height: calc(450px - 120px) !important;
+    max-height: calc(450px - 120px) !important;
+  }
+  
+  .n8n-chat {
+    height: 450px !important;
+    max-width: 100% !important;
+  }
+  
+  .n8n-chat,
+  .n8n-chat-widget,
+  .n8n-chat-window {
+    max-height: 450px !important;
+    max-width: 100% !important;
+  }
 }

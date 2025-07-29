@@ -4,13 +4,24 @@ import FlagshipProducts from './FlagshipProducts';
 import SideProjects from './SideProjects';
 import { MessageCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
-interface PortfolioPageProps {
-  onBackToChat: () => void;
-}
+import { NAVIGATION_ITEMS } from '../lib/constants';
+import type { PortfolioPageProps } from '../types';
 
 const PortfolioPage: React.FC<PortfolioPageProps> = ({ onBackToChat }) => {
   const navigate = useNavigate();
+  
+  // Handle hash scroll on mount
+  React.useEffect(() => {
+    if (window.location.hash) {
+      const element = document.querySelector(window.location.hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+      }
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -19,9 +30,15 @@ const PortfolioPage: React.FC<PortfolioPageProps> = ({ onBackToChat }) => {
           <div className="text-lg sm:text-xl font-bold text-gray-900 text-center sm:text-left">My Product Portfolio</div>
           <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-6">
             <div className="flex space-x-4 sm:space-x-6">
-              <a href="#hero" className="text-sm sm:text-base text-gray-700 hover:text-gray-900 transition-colors">About</a>
-              <a href="#flagship" className="text-sm sm:text-base text-gray-700 hover:text-gray-900 transition-colors">Products</a>
-              <a href="#projects" className="text-sm sm:text-base text-gray-700 hover:text-gray-900 transition-colors">Projects</a>
+              {NAVIGATION_ITEMS.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm sm:text-base text-gray-700 hover:text-gray-900 transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))}
             </div>
             <button
               onClick={() => {

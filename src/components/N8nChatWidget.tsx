@@ -1,127 +1,165 @@
 import React, { useEffect, useRef } from 'react';
-
-interface N8nChatWidgetProps {
-  onSkip: () => void;
-}
+import '@n8n/chat/style.css';
+import { createChat } from '@n8n/chat';
+import { 
+  Brain,
+  Target,
+  Users,
+  ArrowRight,
+  Sparkles
+} from 'lucide-react';
+import { CHAT_CONFIG } from '../lib/constants';
+import type { N8nChatWidgetProps } from '../types';
 
 const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const chatElementRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    // Configure N8N Chat Widget
-    const chatConfig = {
-      chatWindow: {
-        borderRadiusStyle: "rounded",
-        avatarBorderRadius: 25,
-        messageBorderRadius: 6,
-        showTitle: true,
-        title: "Akhil Varma - AI-Driven Product Leader",
-        titleAvatarSrc: "https://www.svgrepo.com/show/339963/chat-bot.svg",
-        avatarSize: 40,
-        welcomeMessage: "Hi! I can walk you through Akhil Varma's product leadership, AI-driven projects, and key outcomes. Ask away — from roadmaps to results.",
-        errorMessage: "Please connect me to n8n first",
-        backgroundColor: "#ffffff",
-        height: 0,
-        width: 0,
-        fontSize: 16,
-        showStarterPrompts: true,
-        starterPrompts: [
-          "\ud83d\udcbc What projects has he worked on?",
-          "\ud83e\udde0 Tell me about his AI work",
-          "\ud83d\udcc8 What are his key outcomes?",
-          "\ud83e\udd1d How does he lead teams?"
-        ]
-      }
-    };
+    // Add custom CSS variables to match your design
+    const style = document.createElement('style');
+    style.textContent = `
+      :root {
+        --chat--color-primary: #4f46e5;
+        --chat--color-primary-shade-50: #4338ca;
+        --chat--color-primary-shade-100: #3730a3;
+        --chat--color-secondary: #8b5cf6;
+        --chat--color-secondary-shade-50: #7c3aed;
+        --chat--color-secondary-shade-100: #6d28d9;
+        --chat--color-white: #ffffff;
+        --chat--color-light: #f8fafc;
+        --chat--color-light-shade-50: #f1f5f9;
+        --chat--color-light-shade-100: #e2e8f0;
+        --chat--color-medium: #cbd5e1;
+        --chat--color-dark: #1e293b;
+        --chat--color-disabled: #64748b;
+        --chat--color-typing: #475569;
 
-    function configureChatWidget() {
-      if (chatElementRef.current) {
-        Object.entries(chatConfig.chatWindow).forEach(([key, value]) => {
-          if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
-            chatElementRef.current!.setAttribute(`data-${key}`, value.toString());
-          } else if (Array.isArray(value)) {
-            chatElementRef.current!.setAttribute(`data-${key}`, JSON.stringify(value));
-          }
-        });
-        chatElementRef.current.setAttribute('data-welcome-message', chatConfig.chatWindow.welcomeMessage);
-      } else {
-        console.warn('n8nchatui-inpage element not found. Chat widget may not be configured.');
-      }
-    }
+        --chat--spacing: 1rem;
+        --chat--border-radius: 0.5rem;
+        --chat--transition-duration: 0.15s;
 
-    // Wait for the custom element to be defined before creating and configuring
-    if ('customElements' in window && typeof window.customElements.whenDefined === 'function') {
-      window.customElements.whenDefined('n8nchatui-inpage').then(() => {
-        // Create the chat element imperatively
-        if (containerRef.current && !chatElementRef.current) {
-          const chatElement = document.createElement('n8nchatui-inpage');
-          chatElement.setAttribute('data-welcome-message', chatConfig.chatWindow.welcomeMessage);
-          // Set the chat backend URL
-          chatElement.setAttribute('data-n8n-chat-url', 'https://akhilaipractise1996.app.n8n.cloud/webhook/00fc39a9-1fb1-48ff-b00e-785268ecb0be/chat');
-          containerRef.current.appendChild(chatElement);
-          chatElementRef.current = chatElement;
-          
-          // Configure the element after it's added to DOM
-          setTimeout(configureChatWidget, 100);
-        }
+        --chat--window--width: 100%;
+        --chat--window--height: 100%;
+
+        --chat--header-height: auto;
+        --chat--header--padding: var(--chat--spacing);
+        --chat--header--background: var(--chat--color-dark);
+        --chat--header--color: var(--chat--color-white);
+        --chat--header--border-top: none;
+        --chat--header--border-bottom: none;
+        --chat--heading--font-size: 1.5em;
+        --chat--subtitle--font-size: inherit;
+        --chat--subtitle--line-height: 1.8;
+
+        --chat--textarea--height: 50px;
+
+        --chat--message--font-size: 1rem;
+        --chat--message--padding: var(--chat--spacing);
+        --chat--message--border-radius: var(--chat--border-radius);
+        --chat--message-line-height: 1.8;
+        --chat--message--bot--background: var(--chat--color-white);
+        --chat--message--bot--color: var(--chat--color-dark);
+        --chat--message--bot--border: 1px solid var(--chat--color-light-shade-100);
+        --chat--message--user--background: var(--chat--color-primary);
+        --chat--message--user--color: var(--chat--color-white);
+        --chat--message--user--border: none;
+        --chat--message--pre--background: rgba(0, 0, 0, 0.05);
+
+        --chat--toggle--background: var(--chat--color-primary);
+        --chat--toggle--hover--background: var(--chat--color-primary-shade-50);
+        --chat--toggle--active--background: var(--chat--color-primary-shade-100);
+        --chat--toggle--color: var(--chat--color-white);
+        --chat--toggle--size: 64px;
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Initialize n8n chat
+    if (containerRef.current) {
+      createChat({
+        webhookUrl: CHAT_CONFIG.webhookUrl,
+        target: '#n8n-chat-container',
+        mode: 'fullscreen',
+        showWelcomeScreen: false,
+        loadPreviousSession: true,
+        initialMessages: CHAT_CONFIG.initialMessages,
+        i18n: CHAT_CONFIG.i18n,
+        metadata: CHAT_CONFIG.metadata
       });
-    } else {
-      // Fallback for very old browsers
-      setTimeout(() => {
-        if (containerRef.current && !chatElementRef.current) {
-          const chatElement = document.createElement('n8nchatui-inpage');
-          chatElement.setAttribute('data-welcome-message', chatConfig.chatWindow.welcomeMessage);
-          // Set the chat backend URL
-          chatElement.setAttribute('data-n8n-chat-url', 'https://akhilaipractise1996.app.n8n.cloud/webhook/00fc39a9-1fb1-48ff-b00e-785268ecb0be/chat');
-          containerRef.current.appendChild(chatElement);
-          chatElementRef.current = chatElement;
-          
-          setTimeout(configureChatWidget, 100);
-        }
-      }, 500);
     }
 
     // Cleanup function
     return () => {
-      if (chatElementRef.current && containerRef.current) {
-        containerRef.current.removeChild(chatElementRef.current);
-        chatElementRef.current = null;
+      if (style.parentNode) {
+        style.parentNode.removeChild(style);
       }
     };
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex flex-col">
-      {/* Enhanced Header */}
-      <header className="bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex flex-col">
-            <h1 className="text-xl font-bold text-[#1E293B] leading-tight">Akhil Varma | AI-Driven Product Leader</h1>
-            <p className="text-sm text-gray-600 mt-2 leading-relaxed font-medium">Portfolio of Impact-First Digital Products</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-start justify-center p-6 pt-32">
+      {/* Background Effects */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-teal-500/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="relative z-10 w-full max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        {/* Left Side - Introduction */}
+        <div className="text-center lg:text-left">
+          <div className="inline-flex items-center gap-2 bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 rounded-full px-4 py-2 mb-6 lg:mb-8">
+            <Sparkles className="w-4 h-4 text-blue-300" />
+            <span className="text-blue-200 text-sm font-medium">Live AI Demo</span>
           </div>
+          
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold text-white mb-4 lg:mb-6 leading-tight">
+            Akhil Varma
+          </h1>
+          
+          <h2 className="text-xl sm:text-2xl lg:text-3xl text-blue-200 mb-4 lg:mb-6 font-light">
+            Senior AI Product Manager
+          </h2>
+          
+          <p className="text-lg sm:text-xl text-gray-300 mb-6 lg:mb-8 leading-relaxed max-w-2xl">
+            Bridging Human Intuition, User Feedback & AI Intelligence.
+            The chatbot on the right is a live example of the conversational AI products I build.
+          </p>
+
+          <div className="flex flex-wrap gap-3 lg:gap-4 mb-6 lg:mb-8 justify-center lg:justify-start">
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-3 lg:px-4 py-2">
+              <Brain className="w-4 lg:w-5 h-4 lg:h-5 text-blue-400" />
+              <span className="text-gray-200 font-medium text-sm lg:text-base">6+ Years</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-3 lg:px-4 py-2">
+              <Target className="w-4 lg:w-5 h-4 lg:h-5 text-teal-400" />
+              <span className="text-gray-200 font-medium text-sm lg:text-base">Product Lifecycle</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-3 lg:px-4 py-2">
+              <Users className="w-4 lg:w-5 h-4 lg:h-5 text-orange-400" />
+              <span className="text-gray-200 font-medium text-sm lg:text-base">AI Strategy</span>
+            </div>
+          </div>
+
           <button
             onClick={onSkip}
-            className="flex items-center space-x-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all transform hover:scale-105 shadow-lg"
+            className="group bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-6 lg:px-8 py-3 lg:py-4 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center gap-3 mx-auto lg:mx-0 text-sm lg:text-base"
           >
-            <span>Explore Full Portfolio</span>
+            View Full Portfolio
+            <ArrowRight className="w-4 lg:w-5 h-4 lg:h-5 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
-      </header>
 
-      {/* Enhanced heading with better visual hierarchy */}
-      <div className="text-center py-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-3">Ask me about what I shipped, not just what I scoped</h2>
-      </div>
-
-      {/* Chat Interface Heading */}
-      <div className="text-center py-4">
-        <h3 className="text-lg font-medium text-gray-700">Start a conversation below</h3>
-      </div>
-
-      {/* N8N Chat UI Container - Full Window Mode */}
-      <div className="flex-1 w-full" ref={containerRef}>
-        {/* Chat element will be created and appended here imperatively */}
+        {/* Right Side - Chat Widget */}
+        <div className="flex justify-center lg:justify-end">
+          <div 
+            id="n8n-chat-container" 
+            className="w-full max-w-lg h-[450px] lg:h-[700px]"
+            ref={containerRef}
+          >
+            {/* n8n chat will be rendered here */}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,48 +1,11 @@
 import React from 'react';
-import { Zap, Code, Lightbulb, Star } from 'lucide-react';
+import { Lightbulb } from 'lucide-react';
+import { SIDE_PROJECTS } from '../lib/constants';
+import { getStatusColor, getCategoryIcon } from '../lib/utils';
+import type { Project } from '../types';
 
 const SideProjects: React.FC = () => {
-  const projects = [
-    {
-      title: '🔢 Personalized Feed Ranking Engine',
-      description: 'Boosted feed engagement by 22% through algorithmic ranking based on behavioral signals and content relevance.',
-      demo: '#',
-    },
-    {
-      title: '🔍 Attrition Risk Predictor',
-      description: 'Built a high-precision model to proactively flag at-risk employees, reducing voluntary attrition by 8 pp YoY.',
-      demo: '#',
-    },
-    {
-      title: '🤖 AI-Powered Job Recommender for Talent Ops',
-      description: 'Streamlined internal job-posting workflows using LLM embeddings, cutting manual effort by 80%.',
-      demo: '#',
-    },
-    {
-      title: '🎧 Automated Podcast Summarizer',
-      description: 'Reduced weekly research time by 50% with a custom summarization pipeline for long-form audio content.',
-      demo: '#',
-    },
-  ];
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Live': return 'bg-green-100 text-green-800';
-      case 'Beta': return 'bg-blue-100 text-blue-800';
-      case 'Development': return 'bg-yellow-100 text-yellow-800';
-      case 'Prototype': return 'bg-purple-100 text-purple-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
-
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case 'AI/ML': return Zap;
-      case 'Analytics': return Code;
-      case 'User Research': return Lightbulb;
-      default: return Code;
-    }
-  };
+  const projects = SIDE_PROJECTS;
 
   return (
     <section id="projects" className="py-12 sm:py-20 bg-gray-50">
@@ -53,7 +16,7 @@ const SideProjects: React.FC = () => {
             <Lightbulb className="w-3 h-3 sm:w-4 sm:h-4" />
             <span>Side Projects & Prototypes</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Experimental Innovation</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4">Vibe Coding and Prototyping</h2>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
             When I'm not working on flagship products, I love experimenting with new ideas, 
             technologies, and solutions to everyday product management challenges.
@@ -68,17 +31,7 @@ const SideProjects: React.FC = () => {
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">{project.title}</h3>
                 <div className="text-gray-700 text-xs sm:text-sm mb-2">{project.description}</div>
                 
-                {/* Innovation Rating */}
-                <div className="flex items-center space-x-2 mb-3">
-                  <div className="flex items-center space-x-1">
-                    <Star className="w-3 h-3 text-yellow-500 fill-current" />
-                    <Star className="w-3 h-3 text-yellow-500 fill-current" />
-                    <Star className="w-3 h-3 text-yellow-500 fill-current" />
-                    <Star className="w-3 h-3 text-yellow-500 fill-current" />
-                    <Star className="w-3 h-3 text-yellow-500 fill-current" />
-                  </div>
-                  <span className="text-xs text-gray-500">Innovation</span>
-                </div>
+
               </div>
               
               <div className="flex-grow"></div>
@@ -106,7 +59,9 @@ const SideProjects: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <a
-                href="mailto:akhil@example.com"
+                href="https://www.linkedin.com/in/akhilvarmaj/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-6 sm:px-8 py-2 sm:py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 font-medium text-sm sm:text-base"
               >
                 Let's Collaborate
@@ -125,4 +80,4 @@ const SideProjects: React.FC = () => {
   );
 };
 
-export default SideProjects;
+export default React.memo(SideProjects);

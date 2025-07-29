@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from
 import ChatbotPage from './components/ChatbotPage';
 import PortfolioPage from './components/PortfolioPage';
 import CaseStudyPage from './components/CaseStudyPage';
+import WorkbenchPage from './components/Workbench';
+import ErrorBoundary from './components/ErrorBoundary';
 
 // Wrapper component to use useNavigate hook
 const ChatbotPageWrapper = () => {
@@ -17,15 +19,28 @@ const PortfolioPageWrapper = () => {
   return <PortfolioPage onBackToChat={() => navigate('/')} />;
 };
 
+const CaseStudyPageWrapper = () => {
+  const navigate = useNavigate();
+  return <CaseStudyPage onBack={() => navigate('/portfolio#case-study-0')} />;
+};
+
+const WorkbenchPageWrapper = () => {
+  const navigate = useNavigate();
+  return <WorkbenchPage onBack={() => navigate('/portfolio#case-study-1')} />;
+};
+
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<ChatbotPageWrapper />} />
-        <Route path="/portfolio" element={<PortfolioPageWrapper />} />
-        <Route path="/case-study/:id" element={<CaseStudyPage />} />
-      </Routes>
-    </Router>
+    <ErrorBoundary>
+      <Router>
+        <Routes>
+          <Route path="/" element={<ChatbotPageWrapper />} />
+          <Route path="/portfolio" element={<PortfolioPageWrapper />} />
+          <Route path="/case-study/0" element={<CaseStudyPageWrapper />} />
+          <Route path="/case-study/1" element={<WorkbenchPageWrapper />} />
+        </Routes>
+      </Router>
+    </ErrorBoundary>
   );
 }
 

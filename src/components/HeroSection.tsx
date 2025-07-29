@@ -11,7 +11,7 @@ const HeroSection: React.FC = () => {
             <div className="space-y-4 sm:space-y-6">
               <div className="inline-flex items-center space-x-2 px-3 sm:px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-xs sm:text-sm font-medium">
                 <Award className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="text-center">HR-Tech & Agentic AI Product Leader</span>
+                <span className="text-center">HR-Tech & AI Product Manager</span>
               </div>
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 Hi, I'm{' '}
@@ -40,17 +40,10 @@ const HeroSection: React.FC = () => {
             {/* Contact & Social Links */}
             <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 sm:gap-4">
               <a
-                href="mailto:jampanaakhilvarma@hotmail.com"
-                className="flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base w-full sm:w-auto justify-center"
-              >
-                <Mail className="w-4 h-4" />
-                <span>Get in Touch</span>
-              </a>
-              <a
                 href="https://www.linkedin.com/in/akhilvarmaj/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-colors text-sm sm:text-base w-full sm:w-auto justify-center"
+                className="flex items-center space-x-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm sm:text-base w-full sm:w-auto justify-center"
               >
                 <Linkedin className="w-4 h-4" />
                 <span>LinkedIn</span>
@@ -70,7 +63,7 @@ const HeroSection: React.FC = () => {
           <div className="relative mt-8 lg:mt-0">
             {/* Profile Image */}
             <div className="relative z-10 mx-auto w-64 h-64 sm:w-80 sm:h-80 bg-gradient-to-br from-blue-400 to-purple-500 rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center">
-              <img src="/assets/1639191622837.jpg" alt="Profile" className="w-40 h-40 sm:w-48 sm:h-48 object-contain mx-auto" />
+              <img src="/assets/1639191622837.jpg" alt="Profile" className="w-64 h-64 sm:w-80 sm:h-80 object-contain mx-auto" />
             </div>
 
             {/* Floating Cards */}

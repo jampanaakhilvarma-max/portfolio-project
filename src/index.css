@@ -12,6 +12,24 @@
   position: relative;
 }
 
+/* Responsive mobile support */
+@media (max-width: 768px) {
+  #n8n-chat-container {
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    min-height: 100dvh !important;
+    border-radius: 0 !important;
+  }
+  .n8n-chat,
+  .n8n-chat-widget,
+  .n8n-chat-window {
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    min-height: 100dvh !important;
+    border-radius: 0 !important;
+  }
+}
+
 /* Override any conflicting styles */
 #n8n-chat-container .n8n-chat {
   height: 700px !important;
@@ -67,6 +85,14 @@
   scrollbar-color: #cbd5e1 #f1f5f9 !important;
 }
 
+@media (max-width: 768px) {
+  .n8n-chat-messages {
+    height: calc(100dvh - 120px) !important;
+    max-height: calc(100dvh - 120px) !important;
+    min-height: calc(100dvh - 120px) !important;
+  }
+}
+
 /* Custom scrollbar styling for webkit browsers */
 .n8n-chat-messages::-webkit-scrollbar {
   width: 6px !important;
@@ -97,6 +123,15 @@
   width: 100% !important;
   max-width: 512px !important;
   position: relative !important;
+}
+
+@media (max-width: 768px) {
+  .n8n-chat {
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    min-height: 100dvh !important;
+    border-radius: 0 !important;
+  }
 }
 
 /* Remove rounded corners from all chat elements */

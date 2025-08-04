@@ -118,7 +118,7 @@ const N8nChatWidget: React.FC<N8nChatWidgetProps> = ({ onSkip }) => {
           </h1>
           
           <h2 className="text-xl sm:text-2xl lg:text-3xl text-blue-200 mb-4 lg:mb-6 font-light">
-            Senior AI Product Manager
+            Product Manager
           </h2>
           
           <p className="text-lg sm:text-xl text-gray-300 mb-6 lg:mb-8 leading-relaxed max-w-2xl">
